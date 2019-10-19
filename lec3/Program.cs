@@ -12,8 +12,7 @@ namespace lec3
     {
         static void Main(string[] args)
         {
-            Shape shape = new Shape();
-            shape.Draw();
+           
 
             Square square = new Square();
             square.Draw();
@@ -23,18 +22,27 @@ namespace lec3
 
             Shape[] shapes = new Shape[]
             {
-                new Shape(), new Circle(), new Square(), new Rectange(), new Point(),  
+                new Circle(), new Square(), new Rectange(), new Point(),  
             };
 
             for (int i = 0; i < shapes.Length; i++)
             {
                 shapes[i].Draw();
+                shapes[i].GetArea();
             }
+
+             Point p = new Point();
+             if (p is Rectange)
+             {
+                 Rectange r = (Rectange) p;
+                 r.Draw();
+                 Console.WriteLine("True");
+             }
 
             Console.ReadLine();
         }
 
-        class Shape
+        abstract class Shape 
         {
             public int Height { get; set; }
             public int Width { get; set; }
@@ -43,6 +51,8 @@ namespace lec3
             {
                 Console.WriteLine("Figure");
             }
+
+            public abstract double GetArea();
         }
 
         class Rectange : Shape
@@ -50,6 +60,11 @@ namespace lec3
             public override void Draw()
             {
                 Console.WriteLine(nameof(Rectange));
+            }
+
+            public override double GetArea()
+            {
+                return Height * Width;
             }
         }
 
@@ -66,6 +81,11 @@ namespace lec3
             public override void Draw()
             {
                 Console.WriteLine("Circle");
+            }
+
+            public override double GetArea()
+            {
+                return Height * Height / 4 * Math.PI;
             }
         }
 
